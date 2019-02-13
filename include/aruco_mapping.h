@@ -63,11 +63,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace aruco_mapping
 {
 
-/** \brief Client class for Aruco mapping */  
+/** \brief Client class for Aruco mapping */
 class ArucoMapping
 {
 public:
-  
+
   /** \brief Struct to keep marker information */
   struct MarkerInfo
   {
@@ -84,17 +84,17 @@ public:
   };
 
 public:
-  
-  /** \brief Construct a client for EZN64 USB control*/  
+
+  /** \brief Construct a client for EZN64 USB control*/
   ArucoMapping(ros::NodeHandle *nh);
-    
+
   ~ArucoMapping();
 
   /** \brief Callback function to handle image processing*/
   void imageCallback(const sensor_msgs::ImageConstPtr &original_image);
 
 private:
-  
+
   /** \brief Function to parse data from calibration file*/
   bool parseCalibrationFile(std::string filename);
 
@@ -117,22 +117,22 @@ private:
   bool processImage(cv::Mat input_image,cv::Mat output_image);
 
   //Launch file params
-  std::string calib_filename_;                    
-  std::string space_type_;                        
+  std::string calib_filename_;
+  std::string space_type_;
   float marker_size_;
   int num_of_markers_;
   bool roi_allowed_;
-  int  roi_x_;                                      
-  int  roi_y_;                                      
-  int  roi_w_;                                     
-  int  roi_h_;     
-  
+  int  roi_x_;
+  int  roi_y_;
+  int  roi_w_;
+  int  roi_h_;
+
   /** \brief Container holding MarkerInfo data about all detected markers */
   std::vector<MarkerInfo> markers_;
-   
+
   /** \brief Actual TF of camera with respect to world's origin */
   tf::StampedTransform world_position_transform_;
-  
+
   /** \brief Actual Pose of camera with respect to world's origin */
   geometry_msgs::Pose world_position_geometry_msg_;
 
@@ -143,26 +143,26 @@ private:
   int closest_camera_index_;
   int lowest_marker_id_;
   bool first_marker_detected_;
-  
+
   tf::TransformListener *listener_;
   tf::TransformBroadcaster broadcaster_;
 
   //Consts
-   static const int CV_WAIT_KEY = 10;
-   static const int CV_WINDOW_MARKER_LINE_WIDTH = 2;
+   static constexpr int CV_WAIT_KEY = 10;
+   static constexpr int CV_WINDOW_MARKER_LINE_WIDTH = 2;
 
-   static const double WAIT_FOR_TRANSFORM_INTERVAL = 2.0;
-   static const double BROADCAST_WAIT_INTERVAL = 0.0001;
-   static const double INIT_MIN_SIZE_VALUE = 1000000;
+   static constexpr double WAIT_FOR_TRANSFORM_INTERVAL = 2.0;
+   static constexpr double BROADCAST_WAIT_INTERVAL = 0.0001;
+   static constexpr double INIT_MIN_SIZE_VALUE = 1000000;
 
-   static const double RVIZ_MARKER_HEIGHT = 0.01;
-   static const double RVIZ_MARKER_LIFETIME = 0.2;
-   static const double RVIZ_MARKER_COLOR_R = 1.0;
-   static const double RVIZ_MARKER_COLOR_G = 1.0;
-   static const double RVIZ_MARKER_COLOR_B = 1.0;
-   static const double RVIZ_MARKER_COLOR_A = 1.0;
+   static constexpr double RVIZ_MARKER_HEIGHT = 0.01;
+   static constexpr double RVIZ_MARKER_LIFETIME = 0.2;
+   static constexpr double RVIZ_MARKER_COLOR_R = 1.0;
+   static constexpr double RVIZ_MARKER_COLOR_G = 1.0;
+   static constexpr double RVIZ_MARKER_COLOR_B = 1.0;
+   static constexpr double RVIZ_MARKER_COLOR_A = 1.0;
 
-   static const double THIS_IS_FIRST_MARKER = -2;
+   static constexpr double THIS_IS_FIRST_MARKER = -2;
 
 }; //ArucoMapping class
 }  //aruco_mapping namespace
